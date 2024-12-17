@@ -11,22 +11,23 @@
       "description": "Do you want to discover some features? Just click on one of the three buttons at the bottom of the screen. The first allows you to call a REST API. The second lets you change the theme color. And the third allows you to change the language."
     },
     "screen.login": {
-      "welcome": "Welcome back!",
-      "login": "Login",
-      "email": "Email",
-      "password": "Password",
+      "welcome": "مرحبا مرة ثانية!",
+      "login": "تسجيل الدخول",
+      "email": "البريد الالكتروني",
+      "password": "كلمة المرور",
       "start": "Start",
-      "change-language": "change language"
+      "change-language": "تغيير اللغة"
     },
     "screen.notesFeed": {
       "dashboard": "Dashboard",
       "more": "More",
       "expenses": "Expenses",
       "empty-list-state": "Empty List! Start adding new",
+      "jod": "{{amount}} JOD",
       "search": "Search",
       "add-new": "Add New",
       "select-type": "Select type",
-      "Note-description": "Note description",
+      "amount": "Amount",
       "new": "New",
       "confirm": "confirm",
       "title": "title",
