@@ -7,23 +7,26 @@ import _ from 'lodash';
 import { Colors } from '@/theme/colors';
 import { commonStyles } from '@/theme/commonStyles';
 import { CustomTextField } from '@/components/molecules';
-import { CustomText, Gap } from '@/components/atoms';
-import type { RootState } from '@/store/rootReducer';
+import { CustomButton, CustomText, Gap } from '@/components/atoms';
 import { formatDateKeyByLang, moderateScale } from '@/utils/appUtils';
-import type { Note } from '@/store/notes/types';
+import { deleteNote, editNote, Note } from '@/store/notes/notes.Slice';
+import { RootState } from '@/store/store';
+import { NoteCategoryEnums } from '@/utils/types';
+import { useAppDispatch } from '@/hooks';
 
 export const NotesList: FC = () => {
     const notes = useSelector((state: RootState) => state.notes.notes);
+    const dispatch = useAppDispatch();
 
     const [searchTxt, setSearchTxt] = useState<string>('');
-    // const [filteredNotes, setFilteredNotes] = useState<Note[]>(notes);
+
     const [groupedNotesKeys, setGroupedNotesKeys] = useState<string[]>([]);
     const [groupedNotes, setGroupedNotes] = useState<Record<string, Note[]>>({});
     const [refreshing, setRefreshing] = useState(false);
 
-    // Group notes by date
+    // Group notes by createdDate
     const groupByDate = useCallback((notesList: Note[]) => {
-        const groupedByDate = _.groupBy(notesList, (note) =>
+        const groupedByDate = _.groupBy(notesList, (note: Note) =>
             formatDateKeyByLang(note?.createdOn || '', 'en')
         );
         setGroupedNotes(groupedByDate);
@@ -35,14 +38,12 @@ export const NotesList: FC = () => {
         (text: string) => {
             setSearchTxt(text);
             if (text.length >= 3) {
-                const filtered = notes.filter((note) =>
+                const filtered = notes.filter((note: Note) =>
                     note.title.toLowerCase().includes(text.toLowerCase()) ||
                     note.description.toLowerCase().includes(text.toLowerCase())
                 );
-                // setFilteredNotes(filtered);
                 groupByDate(filtered);
             } else {
-                // setFilteredNotes(notes);
                 groupByDate(notes);
             }
         },
@@ -51,15 +52,40 @@ export const NotesList: FC = () => {
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
-        // setFilteredNotes(notes);
         groupByDate(notes);
         setTimeout(() => {
             setRefreshing(false);
         }, 1500);
     }, [notes, groupByDate]);
 
+    const updateStatus = (status: NoteCategoryEnums) => {
+        switch (status) {
+            case NoteCategoryEnums.TODO:
+                return NoteCategoryEnums.IN_PROGRESS;
+            case NoteCategoryEnums.IN_PROGRESS:
+                return NoteCategoryEnums.DONE
+            case NoteCategoryEnums.DONE:
+                return NoteCategoryEnums.TODO
+            default:
+                return NoteCategoryEnums.TODO
+        }
+    }
+
+    const handleNoteStatusUpdate = (note: Note) => {
+        // Dispatch the editNote action
+        dispatch(
+            editNote({
+                ...note,
+                status: updateStatus(note.status),
+            })
+        );
+    }
+
+    const handleDeleteNote = (note: Note) => {
+        dispatch(deleteNote(note.id));
+    }
+
     useEffect(() => {
-        // setFilteredNotes(notes);
         groupByDate(notes);
     }, [notes, groupByDate]);
 
@@ -104,9 +130,9 @@ export const NotesList: FC = () => {
                         <Gap gapValue={8} type={'col'} />
 
                         {/* Render Notes */}
-                        {groupedNotes[item]?.map((note: Note, key: number) => (
+                        {groupedNotes[item]?.map((note: Note) => (
                             <View
-                                key={key}
+                                key={note.id}
                                 style={{
                                     backgroundColor: Colors.lightGrey,
                                     borderRadius: 8,
@@ -116,6 +142,17 @@ export const NotesList: FC = () => {
                             >
                                 <CustomText preset={'bold'} text={note.title} />
                                 <CustomText text={note.description} />
+                                {/* progress status action button */}
+                                <CustomButton
+                                    onPress={() => handleNoteStatusUpdate(note)} text={note.status}
+                                    style={{ backgroundColor: note.status === NoteCategoryEnums.DONE ? Colors.green : (note.status === NoteCategoryEnums.IN_PROGRESS ? Colors.purple : Colors.grey) }}
+                                />
+                                <Icon.Button
+                                    color={Colors.red}
+                                    name={'delete'}
+                                    size={moderateScale(20)}
+                                    onPress={() => handleDeleteNote(note)}
+                                />
                             </View>
                         ))}
                         <Gap gapValue={16} type={'col'} />

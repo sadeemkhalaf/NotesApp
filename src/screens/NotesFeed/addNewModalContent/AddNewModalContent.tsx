@@ -8,10 +8,12 @@ import { moderateScale } from "@/utils/appUtils";
 import { Colors } from "@/theme/colors";
 import { commonStyles } from "@/theme/commonStyles";
 import type { NoteCategoryDetails } from "@/utils/types";
+import styles from "./AddNewModalContent.style";
 
 export const AddNewModalContent: FC<{ onSubmitAddNew: (data: NoteCategoryDetails) => void }> = ({ onSubmitAddNew }) => {
     const [description, setDescription] = useState<string>('');
     const [title, setTitle] = useState<string>('');
+    const {textArea} = styles;
 
     return (
         <View style={[{ paddingVertical: moderateScale(24) }, commonStyles.w100, commonStyles.flex1, commonStyles.spaceBetween]}>
@@ -35,6 +37,7 @@ export const AddNewModalContent: FC<{ onSubmitAddNew: (data: NoteCategoryDetails
                     placeholder={t('screen.notesFeed.more')!}
                     style={[commonStyles.w75]}
                     textAlign={'center'}
+                    inputStyle={[textArea]}
                     value={description}
                 />
             </View>

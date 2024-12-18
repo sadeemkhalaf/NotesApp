@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#E9ECEF',
     borderRadius: 8,
   },
-  expenseRow: {
+  NoteRow: {
     backgroundColor: Colors.mainGrey,
     borderRadius: moderateScale(13),
     paddingHorizontal: scaleByWidth(16),
