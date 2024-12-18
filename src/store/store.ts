@@ -1,42 +1,44 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import { persistStore, persistReducer } from 'redux-persist';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { combineReducers } from '@reduxjs/toolkit';
 import languageReducer from './language/language.Slice';
 import userReducer from './user/user.Slice';
 import notesReducer from './notes/notes.Slice';
-import rootSaga from './root.Saga';
-import storage from 'redux-persist/lib/storage';
 
+// Combine all reducers
 const rootReducer = combineReducers({
   language: languageReducer,
-  user: userReducer,
   notes: notesReducer,
+  user: userReducer,
 });
 
+// Persist configuration
 const persistConfig = {
   key: 'root',
-  storage,
-  whitelist: ['language', 'user', 'notes'], // Reducers you want to persist
+  storage: AsyncStorage,
+  whitelist: ['language', 'user', 'notes'], // Reducers to persist
 };
 
-// Create the saga middleware
-const sagaMiddleware = createSagaMiddleware();
-
-// Create the store
 // Create a persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Configure the store
 const store = configureStore({
-  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore actions related to redux-persist
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },
+    }),
+  reducer: persistedReducer,
 });
 
-// Run the root saga
-sagaMiddleware.run(rootSaga);
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
 
 // Persistor
 export const persistor = persistStore(store);
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+
 export default store;
