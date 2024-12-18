@@ -104,7 +104,6 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
                 value={value} />
             )}
             rules={{
-              minLength: 8,
               required: true
             }}
           />

@@ -5,11 +5,6 @@
       "initials": "RNB"
     },
     "common_error": "Oops! Something went wrong.",
-    "screen_example": {
-      "hello_user": "Hi, my name is {{name}}",
-      "title": "Welcome on The $t(common_appName.full)",
-      "description": "Do you want to discover some features? Just click on one of the three buttons at the bottom of the screen. The first allows you to call a REST API. The second lets you change the theme color. And the third allows you to change the language."
-    },
     "screen.login": {
       "welcome": "مرحبا مرة ثانية!",
       "login": "تسجيل الدخول",
@@ -18,35 +13,35 @@
       "start": "Start",
       "change-language": "تغيير اللغة"
     },
-    "screen.notesFeed": {
-      "dashboard": "Dashboard",
-      "logout": "Logout",
-      "more": "More",
-      "Notes": "Notes",
-      "empty-list-state": "Empty List! Start adding new",
-      "jod": "{{amount}} JOD",
-      "search": "Search",
-      "add-new": "Add New",
-      "select-type": "Select type",
-      "amount": "Amount",
-      "new": "New",
-      "confirm": "confirm",
-      "title": "title",
+  "screen.notesFeed": {
+      "dashboard": "لوحة التحكم",
+      "logout": "تسجيل الخروج",
+      "more": "المزيد",
+      "Notes": "الملاحظات",
+      "empty-list-state": "القائمة فارغة! ابدأ بإضافة جديد",
+      "jod": "{{amount}} دينار أردني",
+      "search": "بحث",
+      "add-new": "إضافة جديد",
+      "select-type": "اختر النوع",
+      "amount": "المبلغ",
+      "new": "جديد",
+      "confirm": "تأكيد",
+      "title": "العنوان",
       "NotesTypes": {
-        "todo": "todo",
-        "done": "done",
-        "in-progress": "In progress"
+        "todo": "مهام",
+        "done": "منجز",
+        "in-progress": "قيد التنفيذ"
       }
-    },
-    "common.errors": {
-      "required-field": "Field is Required",
-      "password-not-match": "Password doesn't match",
-      "min-length": "This field min length is {{count}} characters"
-    },
-    "error_boundary": {
-      "title": "Oops! Something went wrong.",
-      "description": "We are sorry for the inconvenience. Please try again later.",
-      "cta": "Reload the screen"
-    }
+},
+"common.errors": {
+  "required-field": "هذا الحقل مطلوب",
+  "password-not-match": "كلمة المرور غير متطابقة",
+  "min-length": "الحد الأدنى لهذا الحقل هو {{count}} أحرف"
+},
+"error_boundary": {
+  "title": "عذرًا! حدث خطأ ما.",
+  "description": "نأسف للإزعاج. يرجى المحاولة مرة أخرى لاحقًا.",
+  "cta": "إعادة تحميل الشاشة"
+}
   }
 }
