@@ -1,3 +1,4 @@
+import type { Note } from "@/store/notes/notes.Slice";
 import { NoteCategoryEnums } from "@/utils/types";
 
 export interface NotesDetails {
@@ -8,17 +9,12 @@ export interface NotesDetails {
 }
 
 
-export const testData: NotesDetails[] = [
+export const testData: Note[] = [
   {
     createdOn: new Date().toISOString(),
-    description: "",
-    id: '99389',
-    title: NoteCategoryEnums.DONE
-  },
-  {
-    createdOn: '2023-01-08T23:27:31.476Z',
-    description: "",
-    id: '99389',
-    title: NoteCategoryEnums.IN_PROGRESS,
+    description: "description of task",
+    id: 99_389,
+    status: NoteCategoryEnums.IN_PROGRESS,
+    title: "test task",
   },
 ];

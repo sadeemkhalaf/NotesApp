@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { t } from 'i18next';
 import Icon from 'react-native-vector-icons/Feather';
 import { NotesList } from './notesList/NotesList.component';
-import { AddNewModalContent } from './AddNewModalContent';
 import { CustomText, Gap } from '@/components/atoms';
 import { commonStyles } from '@/theme/commonStyles';
 import { scaleByHeight, scaleByWidth } from '@/utils/appUtils';
@@ -16,6 +15,7 @@ import { CustomPopupModal } from '@/components/organisms';
 import { LogoHeader } from '@/components/molecules';
 import { addNote } from '@/store/notes/notes.Slice';
 import { useTheme } from '@/theme';
+import { AddNewModalContent } from './addNewModalContent/AddNewModalContent';
 
 const NotesFeed: FC = () => {
   const dispatch = useDispatch();
