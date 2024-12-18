@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { addNote, editNote, deleteNote } from './notesSlice';
+import { addNote, editNote, deleteNote } from './notes.Slice';
 
 function* handleAddNote(action: ReturnType<typeof addNote>) {
   console.log('Task added:', action.payload);

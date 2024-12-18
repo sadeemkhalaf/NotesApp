@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { login, logout } from './userSlice';
+import { login, logout } from './user.Slice';
 
 function* handleLogin(action: ReturnType<typeof login>) {
   console.log(`User logged in with email: ${action.payload}`);

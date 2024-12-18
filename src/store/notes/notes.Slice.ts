@@ -1,11 +1,13 @@
+import { NoteCategoryEnums } from '@/utils/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Note {
   id: number;
   title: string; // Max 10 characters
   description: string; // Max 20 characters
-  status: 'To Do' | 'In Progress' | 'Done';
-  dueDate: string; // ISO date string
+  status: NoteCategoryEnums;
+  dueDate?: string; // ISO date string
+  createdOn?: string;
 }
 
 interface NotesState {

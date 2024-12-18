@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { setLanguage } from './languageSlice';
+import { setLanguage } from './language.Slice';
 
 function* handleLanguageChange(action: ReturnType<typeof setLanguage>) {
   console.log(`Language changed to: ${action.payload}`);
