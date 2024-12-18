@@ -1,7 +1,7 @@
 import {Dimensions} from 'react-native';
 import moment from 'moment';
-// import 'moment/locale/en-gb';
-// import 'moment/locale/ar';
+import 'moment/locale/en-gb';
+import 'moment/locale/ar';
 
 export const screenHeight = Dimensions.get('screen').height;
 export const screenWidth = Dimensions.get('screen').width;
@@ -19,11 +19,6 @@ export const scaleByWidth = (size: number) =>
 
 export const moderateScale = (size: number, factor = 0.5) =>
   size + (scaleByWidth(size) - size) * factor;
-
-export const arabicToEnglishNumbers = (str: string) => {
-  const indianNumbers = '٠١٢٣٤٥٦٧٨٩';
-  return str?.replace(/[٠-٩]/g, d => indianNumbers?.indexOf(d));
-};
 
 // convert numbers before submitting
 export const englishToArabicNumbers = (str: string) => {
