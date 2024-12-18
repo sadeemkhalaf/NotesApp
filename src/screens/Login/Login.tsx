@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity, View } from 'react-native';
@@ -5,7 +6,7 @@ import { Controller, useForm } from 'react-hook-form';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { useTheme } from '@/theme';
-import { useI18n } from '@/hooks';
+import { useAppDispatch, useI18n } from '@/hooks';
 
 import { CustomButton, CustomText, Gap, IconByVariant } from '@/components/atoms';
 import { SafeScreen } from '@/components/templates';
@@ -16,6 +17,7 @@ import { Colors } from '@/theme/colors';
 import { authStyles } from './Login.styles';
 import { Paths } from '@/navigation/paths';
 import type { RootScreenProps } from '@/navigation/types';
+import { login } from '@/store/user/user.Slice';
 
 type FormValues = {
   email: string;
@@ -25,6 +27,7 @@ type FormValues = {
 function Login({ navigation }: RootScreenProps<Paths.Login>) {
   const { t } = useTranslation();
   const { toggleLanguage } = useI18n();
+  const dispatch = useAppDispatch();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
   const { control, formState: { errors }, handleSubmit } = useForm<FormValues>({
     defaultValues: {
@@ -39,14 +42,17 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
   } = useTheme();
 
   const handleLogin = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: Paths.NotesFeed }],
-    });
+    setTimeout(() => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: Paths.NotesFeed }],
+      });
+    }, 200);
   }
-
+  
   const onSubmit = (data: FormValues) => {
     console.log('errors: ', errors, data);
+    dispatch(login(data.email)); // Login user
     handleLogin();
   };
 
