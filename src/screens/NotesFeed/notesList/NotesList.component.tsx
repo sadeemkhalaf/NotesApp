@@ -9,10 +9,12 @@ import { commonStyles } from '@/theme/commonStyles';
 import { CustomTextField } from '@/components/molecules';
 import { CustomButton, CustomText, Gap } from '@/components/atoms';
 import { formatDateKeyByLang, moderateScale } from '@/utils/appUtils';
-import { deleteNote, editNote, Note } from '@/store/notes/notes.Slice';
-import { RootState } from '@/store/store';
+import type { Note } from '@/store/notes/notes.Slice';
+import { deleteNote, editNote } from '@/store/notes/notes.Slice';
+import type { RootState } from '@/store/store';
 import { NoteCategoryEnums } from '@/utils/types';
 import { useAppDispatch } from '@/hooks';
+import { updateStatus } from '@/utils/helper';
 
 export const NotesList: FC = () => {
     const notes = useSelector((state: RootState) => state.notes.notes);
@@ -57,19 +59,6 @@ export const NotesList: FC = () => {
             setRefreshing(false);
         }, 1500);
     }, [notes, groupByDate]);
-
-    const updateStatus = (status: NoteCategoryEnums) => {
-        switch (status) {
-            case NoteCategoryEnums.TODO:
-                return NoteCategoryEnums.IN_PROGRESS;
-            case NoteCategoryEnums.IN_PROGRESS:
-                return NoteCategoryEnums.DONE
-            case NoteCategoryEnums.DONE:
-                return NoteCategoryEnums.TODO
-            default:
-                return NoteCategoryEnums.TODO
-        }
-    }
 
     const handleNoteStatusUpdate = (note: Note) => {
         // Dispatch the editNote action
@@ -144,14 +133,14 @@ export const NotesList: FC = () => {
                                 <CustomText text={note.description} />
                                 {/* progress status action button */}
                                 <CustomButton
-                                    onPress={() => handleNoteStatusUpdate(note)} text={note.status}
-                                    style={{ backgroundColor: note.status === NoteCategoryEnums.DONE ? Colors.green : (note.status === NoteCategoryEnums.IN_PROGRESS ? Colors.purple : Colors.grey) }}
+                                    onPress={() => handleNoteStatusUpdate(note)} style={{ backgroundColor: note.status === NoteCategoryEnums.DONE ? Colors.green : (note.status === NoteCategoryEnums.IN_PROGRESS ? Colors.purple : Colors.grey) }}
+                                    text={note.status}
                                 />
                                 <Icon.Button
                                     color={Colors.red}
                                     name={'delete'}
-                                    size={moderateScale(20)}
                                     onPress={() => handleDeleteNote(note)}
+                                    size={moderateScale(20)}
                                 />
                             </View>
                         ))}
