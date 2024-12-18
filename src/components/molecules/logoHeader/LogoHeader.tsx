@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, TouchableOpacity, View, type ImageRequireSource } from 'react-native';
+import { Image, type ImageRequireSource, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useTranslation } from 'react-i18next';
 import { authStyles } from '@/screens/Login/Login.styles';
@@ -11,8 +11,9 @@ import styles from './LogoHeader.style';
 import { useAppDispatch } from '@/hooks';
 import { logout } from '@/store/user/user.Slice';
 import { useNavigation } from '@react-navigation/native';
-import { RootScreenProps } from '@/navigation/types';
+import type { RootStackParamList } from '@/navigation/types';
 import { Paths } from '@/navigation/paths';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
 
 const logo = require('./../../../../assets/imgs/short-logo.png') as ImageRequireSource;
@@ -20,7 +21,7 @@ const logo = require('./../../../../assets/imgs/short-logo.png') as ImageRequire
 const LogoHeader = ({ withLogout = false }: { withLogout?: boolean }) => {
     const { colors } = useTheme();
     const { t } = useTranslation();
-    const { navigation } = useNavigation<RootScreenProps>();
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList, Paths.Login, undefined>>();
     const dispatch = useAppDispatch();
 
     const { logoutButton } = styles;
@@ -38,8 +39,8 @@ const LogoHeader = ({ withLogout = false }: { withLogout?: boolean }) => {
     return (
         <View style={[commonStyles.flex, commonStyles.row, commonStyles.spaceBetween]}>
             <Image resizeMode={'contain'} source={logo} style={[authStyles.headerLogo]} />
-            {withLogout ? <TouchableOpacity style={logoutButton} onPress={handleLogout}>
-                <Icon name='logout' size={moderateScale(24)} color={colors.purple500} />
+            {withLogout ? <TouchableOpacity onPress={handleLogout} style={logoutButton}>
+                <Icon color={colors.purple500} name='logout' size={moderateScale(24)} />
                 <CustomText text={t('screen.notesFeed.logout')} />
             </TouchableOpacity> : null}
         </View>

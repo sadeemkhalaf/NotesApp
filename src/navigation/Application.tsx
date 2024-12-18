@@ -1,3 +1,4 @@
+import React from 'react';
 import type { RootStackParamList } from '@/navigation/types';
 
 import { NavigationContainer } from '@react-navigation/native';

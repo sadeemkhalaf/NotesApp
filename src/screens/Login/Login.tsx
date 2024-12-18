@@ -26,7 +26,7 @@ type FormValues = {
 
 function Login({ navigation }: RootScreenProps<Paths.Login>) {
   const { t } = useTranslation();
-  const { toggleLanguage } = useI18n();
+  const { changeLanguage, toggleLanguage } = useI18n();
   const dispatch = useAppDispatch();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
   const { control, formState: { errors }, handleSubmit } = useForm<FormValues>({
@@ -51,7 +51,7 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
   }
   
   const onSubmit = (data: FormValues) => {
-    console.log('errors: ', errors, data);
+    // console.log('errors: ', errors, data);
     dispatch(login(data.email)); // Login user
     handleLogin();
   };
@@ -66,7 +66,7 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
       <View style={authStyles.changeLanguageContainer}>
         <CustomText preset={'calloutLabel'} text={t('screen.login.change-language')!} />
         <TouchableOpacity
-          onPress={toggleLanguage}
+          onPress={changeLanguage}
           style={[gutters.marginHorizontal_12]}
           testID="change-language-button"
         >
@@ -118,6 +118,7 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
 
       </View>
       <CustomButton onPress={handleSubmit(onSubmit)} text={t('screen.login.login')!} />
+      <Gap gapValue={36} type={'col'} />
     </SafeScreen>
   );
 }

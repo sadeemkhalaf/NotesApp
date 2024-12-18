@@ -10,7 +10,7 @@ import type { RootScreenProps } from '@/navigation/types';
 import { AssetByVariant } from '@/components/atoms';
 import { SafeScreen } from '@/components/templates';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import type { RootState } from '@/store/store';
 
 function Startup({ navigation }: RootScreenProps<Paths.Startup>) {
   const { layout } = useTheme();
@@ -18,17 +18,21 @@ function Startup({ navigation }: RootScreenProps<Paths.Startup>) {
 
   useEffect(() => {
     setTimeout(() => {
-      loggedInState ?
-      navigation.reset({
-        index: 0,
-        routes: [{ name: Paths.NotesFeed }],
-      }) :  navigation.reset({
-        index: 0,
-        routes: [{ name: Paths.Login }],
-      })
+      if (loggedInState) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: Paths.NotesFeed }],
+        })
+      }
+      else {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: Paths.Login }],
+        })
+      }
       ;
     }, 1500);
-  }, [navigation]);
+  }, [loggedInState, navigation]);
 
   return (
     <SafeScreen>

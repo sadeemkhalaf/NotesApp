@@ -86,7 +86,6 @@ export const NotesList: FC = () => {
                     color={Colors.grey}
                     name={'search'}
                     size={moderateScale(20)}
-                    style={{ left: 8, position: 'absolute', top: 12 }}
                 />
                 <CustomTextField
                     inputStyle={{ borderBottomWidth: 0, textAlign: 'left' }}
