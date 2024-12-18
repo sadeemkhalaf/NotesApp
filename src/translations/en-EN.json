@@ -20,8 +20,9 @@
     },
     "screen.notesFeed": {
       "dashboard": "Dashboard",
+      "logout": "Logout",
       "more": "More",
-      "expenses": "Expenses",
+      "Notes": "Notes",
       "empty-list-state": "Empty List! Start adding new",
       "search": "Search",
       "add-new": "Add New",
@@ -30,20 +31,10 @@
       "new": "New",
       "confirm": "confirm",
       "title": "title",
-      "ExpensesTypes": {
-        "shopping": "Shopping",
-        "groceries": "Groceries",
-        "utilities": "Utilitis",
-        "medical": "Medical",
-        "donations": "Donations",
-        "transportations": "Transportations",
-        "rent": "Rent",
-        "subscriptions": "Subscriptions",
-        "credit-card": "Credit card",
-        "vacation": "Vacation",
-        "personal-care": "Personal care",
-        "outing": "Outing",
-        "other": "Other"
+      "NotesTypes": {
+        "todo": "todo",
+        "done": "done",
+        "in-progress": "In progress"
       }
     },
     "common.errors": {
