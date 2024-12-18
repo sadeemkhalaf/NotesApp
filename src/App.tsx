@@ -10,13 +10,15 @@ import ApplicationNavigator from '@/navigation/Application';
 
 import store, { persistor } from '@/store/store';
 import '@/translations';
+import { View } from 'react-native';
+import { CustomText } from './components/atoms';
 
 export const storage = new MMKV();
 
 function App() {
   return (
     <GestureHandlerRootView>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+      <PersistGate loading={<View><CustomText text='Loading...' /></View>} persistor={persistor}>
         <Provider store={store}>
           <ThemeProvider storage={storage}>
             <ApplicationNavigator />
