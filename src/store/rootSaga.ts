@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import languageSaga from './language/saga';
-import notesSaga from './notes/saga';
+import { watchLanguageSaga } from './language/languageSaga';
+import { watchUserSaga } from './user/userSaga';
+import { watchNotesSaga } from './notes/notesSaga';
 
-// Combine all sagas
 export default function* rootSaga() {
-  yield all([languageSaga(), notesSaga()]);
+  yield all([watchLanguageSaga(), watchUserSaga(), watchNotesSaga()]);
 }

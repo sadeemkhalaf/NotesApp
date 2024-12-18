@@ -1,13 +1,27 @@
-import { legacy_createStore, applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import { rootReducer } from './rootReducer';
+import languageReducer from './language/languageSlice';
+import userReducer from './user/userSlice';
+import notesReducer from './notes/notesSlice';
 import rootSaga from './rootSaga';
 
-// Initialize Saga Middleware
+// Create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Create Redux Store
-export const store = legacy_createStore(rootReducer, applyMiddleware(sagaMiddleware));
+// Create the store
+const store = configureStore({
+  reducer: {
+    language: languageReducer,
+    user: userReducer,
+    notes: notesReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+});
 
-// Run all sagas
+// Run the root saga
 sagaMiddleware.run(rootSaga);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export default store;
