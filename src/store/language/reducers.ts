@@ -2,7 +2,7 @@ import type { LanguageActionTypes, LanguageState } from './types';
 import { SET_LANGUAGE } from './types';
 
 const initialState: LanguageState = {
-  language: 'en-EN',
+  language: 'en',
 };
 
 export default function languageReducer(

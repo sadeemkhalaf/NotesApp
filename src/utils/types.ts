@@ -19,17 +19,7 @@ export interface NoteCategoryDetails {
 }
 
 export enum NoteCategoryEnums {
-  CREDIT = 'credit-card',
-  DONATIONS = 'donations',
-  GROCERIES = 'groceries',
-  MEDICAL = 'medical',
-  OTHER = 'other',
-  OUTING = 'outing',
-  PERSONAL_CARE = 'personal-care',
-  RENT = 'rent',
-  SHOPPING = 'shopping',
-  SUBSCRIPTIONS = 'subscriptions',
-  TRANSPORTATIONS = 'transportations',
-  UTILITIES = 'utilities',
-  VACATION = 'vacation',
+  DONE = 'done',
+  IN_PROGRESS = 'in-progress',
+  TODO = 'to-do',
 }

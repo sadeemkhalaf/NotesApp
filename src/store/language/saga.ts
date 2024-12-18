@@ -2,7 +2,7 @@ import { SET_LANGUAGE } from './types';
 import { takeLatest } from 'redux-saga/effects';
 
 export interface SetLanguageAction {
-  payload: 'ar-AR' | 'en-EN';
+  payload: 'ar' | 'en';
   type: typeof SET_LANGUAGE;
 }
 

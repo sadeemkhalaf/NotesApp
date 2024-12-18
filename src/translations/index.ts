@@ -11,16 +11,16 @@ import ar from './ar-AR.json';
 export const defaultNS = 'notesapp' as const;
 
 export const resources = {
-  'ar-AR': ar,
-  'en-EN': en,
+  'ar': ar,
+  'en': en,
 } as const satisfies Record<Language, unknown>;
 
 i18n
   .use(initReactI18next)
   .init({
     defaultNS,
-    fallbackLng: 'ar-AR',
-    lng: 'ar-AR',
+    fallbackLng: 'ar',
+    lng: 'ar',
     resources,
   })
   .then(() => {

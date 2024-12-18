@@ -2,11 +2,11 @@
 export const SET_LANGUAGE = 'SET_LANGUAGE' as const;
 
 export interface LanguageState {
-    language: 'ar-AR' | 'en-EN';
+    language: 'ar' | 'en';
 }
 
 interface SetLanguageAction {
-    payload: 'ar-AR' | 'en-EN';
+    payload: 'ar' | 'en';
     type: typeof SET_LANGUAGE;
 }
 

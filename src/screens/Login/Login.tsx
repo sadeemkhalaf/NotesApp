@@ -9,13 +9,13 @@ import { useI18n } from '@/hooks';
 
 import { CustomButton, CustomText, Gap, IconByVariant } from '@/components/atoms';
 import { SafeScreen } from '@/components/templates';
-import { CustomTextField } from '@/components/molecules';
+import { CustomTextField, LogoHeader } from '@/components/molecules';
 import { commonStyles } from '@/theme/commonStyles';
 import { moderateScale, scaleByWidth } from '@/utils/appUtils';
 import { Colors } from '@/theme/colors';
 import { authStyles } from './Login.styles';
 import { Paths } from '@/navigation/paths';
-import { RootScreenProps } from '@/navigation/types';
+import type { RootScreenProps } from '@/navigation/types';
 
 type FormValues = {
   email: string;
@@ -56,6 +56,7 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
     <SafeScreen
       style={{ paddingHorizontal: scaleByWidth(30) }}
     >
+      <LogoHeader />
       <View style={authStyles.changeLanguageContainer}>
         <CustomText preset={'calloutLabel'} text={t('screen.login.change-language')!} />
         <TouchableOpacity

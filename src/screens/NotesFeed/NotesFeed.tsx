@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { t } from 'i18next';
 import Icon from 'react-native-vector-icons/Feather';
-import { NotesList } from './notesList/NotesList';
+import { NotesList } from './notesList/NotesList.component';
 import { AddNewModalContent } from './AddNewModalContent';
 import { addNote } from '@/store/notes/actions';
 import { CustomText, Gap } from '@/components/atoms';
@@ -14,6 +14,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import type { NoteCategoryDetails } from '@/utils/types';
 import { SafeScreen } from '@/components/templates';
 import { CustomPopupModal } from '@/components/organisms';
+import { LogoHeader } from '@/components/molecules';
 
 const NotesFeed: FC = () => {
   const dispatch = useDispatch();
@@ -31,11 +32,14 @@ const NotesFeed: FC = () => {
       style={{ paddingHorizontal: scaleByWidth(30) }}
     >
       <Gap gapValue={64} type={'col'} />
+      <LogoHeader />
+      <Gap gapValue={32} type={'col'} />
+      <Gap gapValue={64} type={'col'} />
       <Gap gapValue={32} type={'col'} />
       <View style={[commonStyles.flex, commonStyles.row, commonStyles.spaceBetween]}>
         <CustomText preset={'headerBold'} text={t('screen.notesFeed.dashboard')} />
         <TouchableOpacity onPress={() => setExpensesModalVisible(true)} style={[commonStyles.flex, commonStyles.row]}>
-          <CustomText preset={'bold'} style={{ color: Colors.primary }} text={t('screen.notesFeed.new')}  />
+          <CustomText preset={'bold'} style={{ color: Colors.primary }} text={t('screen.notesFeed.new')} />
           <Icon color={Colors.primary} name={'plus'} />
         </TouchableOpacity>
       </View>

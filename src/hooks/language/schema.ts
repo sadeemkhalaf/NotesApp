@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const enum SupportedLanguages {
-  AR_AR = 'ar-AR',
-  EN_EN = 'en-EN',
+  AR_AR = 'ar',
+  EN_EN = 'en',
 }
 
 export const languageSchema = z.enum([
