@@ -18,6 +18,10 @@ import { authStyles } from './Login.styles';
 import { Paths } from '@/navigation/paths';
 import type { RootScreenProps } from '@/navigation/types';
 import { login } from '@/store/user/user.Slice';
+import { setLanguage } from '@/store/language/language.Slice';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store/store';
+import { SupportedLanguages } from '@/hooks/language/schema';
 
 type FormValues = {
   email: string;
@@ -26,8 +30,9 @@ type FormValues = {
 
 function Login({ navigation }: RootScreenProps<Paths.Login>) {
   const { t } = useTranslation();
-  const { changeLanguage, toggleLanguage } = useI18n();
+  const { toggleLanguage, changeLanguage } = useI18n();
   const dispatch = useAppDispatch();
+  const { language } = useSelector((state: RootState) => state.language);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
   const { control, formState: { errors }, handleSubmit } = useForm<FormValues>({
     defaultValues: {
@@ -49,7 +54,7 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
       });
     }, 200);
   }
-  
+
   const onSubmit = (data: FormValues) => {
     // console.log('errors: ', errors, data);
     dispatch(login(data.email)); // Login user
@@ -57,6 +62,12 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
   };
 
   const togglePasswordVisibility = () => setPasswordVisible(prev => !prev)
+
+  const handleChangeLanguage = () => {
+    toggleLanguage();
+    changeLanguage(language == 'ar' ? SupportedLanguages.EN_EN : SupportedLanguages.AR_AR);
+    dispatch(setLanguage(language == 'ar' ? SupportedLanguages.EN_EN : SupportedLanguages.AR_AR));
+  }
 
   return (
     <SafeScreen
@@ -66,7 +77,7 @@ function Login({ navigation }: RootScreenProps<Paths.Login>) {
       <View style={authStyles.changeLanguageContainer}>
         <CustomText preset={'calloutLabel'} text={t('screen.login.change-language')!} />
         <TouchableOpacity
-          onPress={changeLanguage}
+          onPress={handleChangeLanguage}
           style={[gutters.marginHorizontal_12]}
           testID="change-language-button"
         >

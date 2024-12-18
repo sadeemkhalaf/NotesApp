@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     logoutButton: {
+        alignItems: 'center',
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
     }
 })
 

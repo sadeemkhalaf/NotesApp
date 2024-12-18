@@ -53,7 +53,7 @@ const NotesFeed: FC = () => {
 
       {/* Add New modal */}
       <CustomPopupModal
-        height={scaleByHeight(340)}
+        height={scaleByHeight(450)}
         onModalClose={() => setNotesModalVisible(false)}
         visible={NotesModalVisible}>
         <AddNewModalContent onSubmitAddNew={onSubmitAddNew} />

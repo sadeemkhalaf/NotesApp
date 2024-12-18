@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/theme/colors';
-import { moderateScale, scaleByWidth } from '@/utils/appUtils';
+import { moderateScale, scaleByHeight, scaleByWidth } from '@/utils/appUtils';
 
 export const styles = StyleSheet.create({
   absoluteIcon: {
@@ -66,8 +66,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: scaleByWidth(16),
     paddingVertical: scaleByWidth(18),
   },
+  noteRowElement: { borderColor: Colors.grey, borderRadius: moderateScale(8), borderWidth: 1, marginVertical: scaleByHeight(8), padding: moderateScale(8) },
   searchbox: {
     backgroundColor: Colors.layout,
     borderRadius: moderateScale(8),
-  },
+  }
 });

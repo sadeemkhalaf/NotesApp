@@ -8,13 +8,14 @@ import { Colors } from '@/theme/colors';
 import { commonStyles } from '@/theme/commonStyles';
 import { CustomTextField } from '@/components/molecules';
 import { CustomButton, CustomText, Gap } from '@/components/atoms';
-import { formatDateKeyByLang, moderateScale } from '@/utils/appUtils';
+import { formatDateKeyByLang, moderateScale, scaleByHeight } from '@/utils/appUtils';
 import type { Note } from '@/store/notes/notes.Slice';
 import { deleteNote, editNote } from '@/store/notes/notes.Slice';
 import type { RootState } from '@/store/store';
 import { NoteCategoryEnums } from '@/utils/types';
 import { useAppDispatch } from '@/hooks';
 import { updateStatus } from '@/utils/helper';
+import { styles } from '../NotesFeed.styles';
 
 export const NotesList: FC = () => {
     const notes = useSelector((state: RootState) => state.notes.notes);
@@ -121,26 +122,23 @@ export const NotesList: FC = () => {
                         {groupedNotes[item]?.map((note: Note) => (
                             <View
                                 key={note.id}
-                                style={{
-                                    backgroundColor: Colors.lightGrey,
-                                    borderRadius: 8,
-                                    marginVertical: 4,
-                                    padding: 12,
-                                }}
+                                style={[commonStyles.flex, commonStyles.w100, styles.noteRowElement]}
                             >
                                 <CustomText preset={'bold'} text={note.title} />
                                 <CustomText text={note.description} />
                                 {/* progress status action button */}
-                                <CustomButton
-                                    onPress={() => handleNoteStatusUpdate(note)} style={{ backgroundColor: note.status === NoteCategoryEnums.DONE ? Colors.green : (note.status === NoteCategoryEnums.IN_PROGRESS ? Colors.purple : Colors.grey) }}
-                                    text={note.status}
-                                />
-                                <Icon.Button
-                                    color={Colors.red}
-                                    name={'delete'}
-                                    onPress={() => handleDeleteNote(note)}
-                                    size={moderateScale(20)}
-                                />
+                                <View style={[commonStyles.flex, commonStyles.row, commonStyles.spaceBetween, commonStyles.w100]}>
+                                    <CustomButton
+                                        onPress={() => handleNoteStatusUpdate(note)} style={{ backgroundColor: note.status === NoteCategoryEnums.DONE ? Colors.green : (note.status === NoteCategoryEnums.IN_PROGRESS ? Colors.purple : Colors.grey) }}
+                                        text={note.status}
+                                    />
+                                    <Icon
+                                        color={Colors.red}
+                                        name={'delete'}
+                                        onPress={() => handleDeleteNote(note)}
+                                        size={moderateScale(20)}
+                                    />
+                                </View>
                             </View>
                         ))}
                         <Gap gapValue={16} type={'col'} />
