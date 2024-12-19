@@ -28,7 +28,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        // Ignore actions related to redux-persist
         ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
       },
     }),

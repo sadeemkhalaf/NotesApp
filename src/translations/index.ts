@@ -1,4 +1,3 @@
-import 'intl-pluralrules';
 import type { Language } from '@/hooks/language/schema';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
@@ -23,7 +22,6 @@ i18n
     resources,
   })
   .then(() => {
-    // Add a capitalization formatter
     i18n.services.formatter?.add(
       'capitalize',
       (value: string) =>
@@ -36,7 +34,7 @@ store.subscribe(() => {
   const state = store.getState();
   const currentLanguage = state.language.language;
   if (i18n.language !== currentLanguage) {
-    i18n.changeLanguage(currentLanguage); // Update i18n language dynamically
+    i18n.changeLanguage(currentLanguage); 
   }
 });
 
